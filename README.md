@@ -1,16 +1,21 @@
-# Deel-Task
+## Overview
 
-This repository contains an automation task for Deel, completed in 2024. The project is based on Playwright for end-to-end testing of a web-based salary insights form.
-
-## Project Overview
-
-The task involves writing automated tests for a salary insights page, where users can select a role, and country display corresponding salary data. The tests cover 3 combinations of roles and countries to ensure the correct functionality of the form.
+This repository contains an automation task for Deel, completed in 2024. It uses Playwright for end-to-end testing of a salary insights form, allowing users to select a role and country to view corresponding salary data. The tests cover three role-country combinations.
 
 ## Prerequisites
 
-- Node.js (LTS version recommended)
+- Node.js (LTS recommended)
 - Playwright
 
-## Running tests
+## Debugging with Algo CI
 
+I use Algo CI reports to identify issues and gain insights into test failures.
+
+## CI with GitHub Actions
+
+The project is integrated with GitHub Actions for continuous testing on each push or pull request.
+
+## Running Tests
+
+Use the following command to run the tests:
 npx playwright test
