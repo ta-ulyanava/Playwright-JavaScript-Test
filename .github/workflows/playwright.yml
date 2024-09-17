@@ -18,7 +18,7 @@ jobs:
       - name: Install Chromium Browser only
         run: npx playwright install chromium --with-deps --force
       - name: Run Playwright tests
-        run: npx playwright test --project=chromium --headed --max-failures=1
+        run: npx playwright test --project=chromium --max-failures=1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
