@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import SalaryInsights from '../pages/salaryInsights';
+import { argosScreenshot } from "@argos-ci/playwright";
 
 const dataset = require("../utils/salaryInsightsTestData");
 
@@ -10,9 +11,12 @@ test.describe('Salary Insights Tests', () => {
 
       // Submit form
       await salaryInsites.navigate();
+      await argosScreenshot(page, "page loaded");
       await salaryInsites.selectRoleOptionFromDropdown(data.role);
       await salaryInsites.selectCountryOptionFromDropdown(data.country);
+      await argosScreenshot(page, "role and country selected");
       await salaryInsites.searchButton.click();
+      await argosScreenshot(page, "form submitted");
 
       // Assertions
       await salaryInsites.verifyFilterBarForRoleCountryAndCurrencyCode(data.role, data.country, data.currency.code);
