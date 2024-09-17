@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --force
       - name: Install Chromium Browser only
-        run: npx playwright install --with-deps --force
+        run: npx playwright install chromium --with-deps --force
       - name: Run Playwright tests
         run: npx playwright test --project=chromium --headed --max-failures=1
       - uses: actions/upload-artifact@v4
