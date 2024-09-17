@@ -18,4 +18,4 @@ The project is integrated with GitHub Actions for continuous testing on each pus
 ## Running Tests
 
 Use the following command to run the tests:
-npx playwright test
+npx playwright test --project=chromium
