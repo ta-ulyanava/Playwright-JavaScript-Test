@@ -1,12 +1,15 @@
-import { test, expect } from '@playwright/test';
-import SalaryInsights from '../pages/salaryInsights';
+import { test } from "@playwright/test";
+import SalaryInsights from "../pages/salaryInsights";
 import { argosScreenshot } from "@argos-ci/playwright";
 
-const dataset = require("../utils/salaryInsightsTestData");
+//const dataset = require("../utils/salaryInsightsTestData").default;
+import salaryInsightsTestData from "../utils/salaryInsightsTestData";
 
-test.describe('Salary Insights Tests', () => {
+test.describe("Salary Insights Tests", () => {
   for (const data of dataset) {
-    test(`Displays salary for selected role ${data.role} in ${data.country}`, async ({ page }) => {
+    test(`Displays salary for selected role ${data.role} in ${data.country}`, async ({
+      page,
+    }) => {
       const salaryInsites = new SalaryInsights(page);
 
       // Submit form
@@ -19,9 +22,21 @@ test.describe('Salary Insights Tests', () => {
       await argosScreenshot(page, "form submitted");
 
       // Assertions
-      await salaryInsites.verifyFilterBarForRoleCountryAndCurrencyCode(data.role, data.country, data.currency.code);
-      await salaryInsites.verifySalaryTableForRoleCountryAndCurrencySymbol(data.role, data.country, data.currency.symbol);
-      await salaryInsites.verifyPromoSectionForRoleCountryAndCurrencySymbol(data.role, data.country, data.currency.symbol);
+      await salaryInsites.verifyFilterBarForRoleCountryAndCurrencyCode(
+        data.role,
+        data.country,
+        data.currency.code
+      );
+      await salaryInsites.verifySalaryTableForRoleCountryAndCurrencySymbol(
+        data.role,
+        data.country,
+        data.currency.symbol
+      );
+      await salaryInsites.verifyPromoSectionForRoleCountryAndCurrencySymbol(
+        data.role,
+        data.country,
+        data.currency.symbol
+      );
     });
   }
 });
