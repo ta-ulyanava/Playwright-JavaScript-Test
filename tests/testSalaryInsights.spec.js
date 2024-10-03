@@ -1,9 +1,9 @@
 import { test } from "@playwright/test";
 import SalaryInsights from "../pages/salaryInsights";
-import salaryInsightsTestData from "../utils/salaryInsightsTestData";
+import countryList from "../utils/salaryInsightsTestData";
 
 test.describe("Salary Insights Tests", () => {
-  for (const data of salaryInsightsTestData) {
+  for (const data of countryList) {
     test(`Displays salary for selected role ${data.role} in ${data.country}`, async ({
       page,
     }) => {

@@ -76,13 +76,13 @@ export default class SalaryInsights {
     );
 
     // Assert all parts of the promo section description
-    await expect(promoDescriptionText).toContain(
+    expect(promoDescriptionText).toContain(
       `The median salary is ${currencySymbol}`
     );
-    await expect(promoDescriptionText).toContain(
+    expect(promoDescriptionText).toContain(
       `per year for a Senior ${role} in ${country}`
     );
-    await expect(promoDescriptionText).toContain(
+    expect(promoDescriptionText).toContain(
       `Salary estimates are based on anonymous submissions to Deel by ${role} employees in ${country}`
     );
 
