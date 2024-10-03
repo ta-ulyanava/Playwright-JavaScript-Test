@@ -8,7 +8,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@argos-ci/playwright": "^3.6.1",
     "@playwright/test": "^1.47.1",
     "@types/node": "^22.5.5"
   }

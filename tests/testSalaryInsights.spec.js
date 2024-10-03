@@ -1,12 +1,10 @@
 import { test } from "@playwright/test";
 import SalaryInsights from "../pages/salaryInsights";
 import { argosScreenshot } from "@argos-ci/playwright";
-
-//const dataset = require("../utils/salaryInsightsTestData").default;
 import salaryInsightsTestData from "../utils/salaryInsightsTestData";
 
 test.describe("Salary Insights Tests", () => {
-  for (const data of dataset) {
+  for (const data of salaryInsightsTestData) {
     test(`Displays salary for selected role ${data.role} in ${data.country}`, async ({
       page,
     }) => {
