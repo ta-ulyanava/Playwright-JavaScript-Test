@@ -9,7 +9,7 @@ export default class SalaryInsights {
     this.selectCountry = page.getByTestId("country-field");
     this.searchButton = page.getByRole("button", { name: "Search" });
 
-    // Assertions
+    // Result fields
     this.filterBar = page.getByTestId("filter-bar");
     this.salaryTable = page.getByTestId("salary-table");
     this.promoSection = page.locator("#promo-section-container");
