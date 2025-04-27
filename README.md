@@ -1,6 +1,6 @@
 ## Overview
 
-This repository contains an automation task for Deel, completed in 2024. It uses Playwright for end-to-end testing of a salary insights form, allowing users to select a role and country to view corresponding salary data. The tests cover three role-country combinations.
+This repository contains an automated test. It uses Playwright for end-to-end testing of a salary insights form, allowing users to select a role and country to view corresponding salary data. The tests cover three role-country combinations.
 
 ## Prerequisites
 
@@ -9,7 +9,7 @@ This repository contains an automation task for Deel, completed in 2024. It uses
 
 ## CI with GitHub Actions
 
-The project is integrated with GitHub Actions for continuous testing on each push or pull request.
+The project is integrated with GitHub Actions to continuously test each push or pull request.
 
 ## Running Tests
 
