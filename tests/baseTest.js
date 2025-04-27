@@ -1,5 +1,5 @@
 import { test as base, expect } from "@playwright/test";
-import { allure } from "allure-playwright/runtime";
+import { allure } from "allure-playwright";
 import SalaryInsightsPage from "../pages/SalaryInsightsPage";
 
 export const test = base.extend({
