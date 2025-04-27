@@ -7,9 +7,7 @@ test.describe("Salary Insights Tests", () => {
       salaryInsightsPage,
     }) => {
       await salaryInsightsPage.open();
-      await salaryInsightsPage.chooseRole(data.role);
-      await salaryInsightsPage.chooseCountry(data.country);
-      await salaryInsightsPage.clickSearch();
+      await salaryInsightsPage.fillFormAndSearch(data.role, data.country);
 
       await salaryInsightsPage.checkFilterBar(
         data.role,
@@ -39,9 +37,7 @@ test.describe("Salary Insights Negative Tests", () => {
     await salaryInsightsPage.open();
     await salaryInsightsPage.chooseRole("QA Engineer");
     await salaryInsightsPage.clickSearch();
-    await expect(salaryInsightsPage.result.main).toContainText(
-      "Country is required"
-    );
+    await salaryInsightsPage.checkMainErrorMessage("Country is required");
     await expect(salaryInsightsPage.result.filterBar).toBeHidden();
   });
 });

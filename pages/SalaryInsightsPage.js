@@ -43,6 +43,11 @@ export default class SalaryInsightsPage extends BasePage {
   async clickSearch() {
     await this.form.searchButton.click();
   }
+  async fillFormAndSearch(role, country) {
+    await this.chooseRole(role);
+    await this.chooseCountry(country);
+    await this.clickSearch();
+  }
 
   async checkFilterBar(role, country, currencyCode) {
     await this.verifyTextInElement(this.result.filterBar, role);
@@ -79,5 +84,8 @@ export default class SalaryInsightsPage extends BasePage {
 
     const countryFlag = promo.locator(`img[alt="${country.toLowerCase()}"]`);
     await expect(countryFlag).toHaveAttribute("alt", country.toLowerCase());
+  }
+  async checkMainErrorMessage(expectedMessage) {
+    await expect(this.result.main).toContainText(expectedMessage);
   }
 }
