@@ -1,15 +1,14 @@
 import { expect } from "@playwright/test";
+import BasePage from "./BasePage";
 
-export default class SalaryInsights {
+export default class SalaryInsightsPage extends BasePage {
   constructor(page) {
-    this.page = page;
+    super(page);
 
-    // Form fields
     this.selectRole = page.getByTestId("role-field");
     this.selectCountry = page.getByTestId("country-field");
     this.searchButton = page.getByRole("button", { name: "Search" });
 
-    // Result fields
     this.filterBar = page.getByTestId("filter-bar");
     this.salaryTable = page.getByTestId("salary-table");
     this.promoSection = page.locator("#promo-section-container");
@@ -18,17 +17,14 @@ export default class SalaryInsights {
     );
   }
 
-  async navigate() {
-    await this.page.goto("https://growth.deel.training/dev/salary-insights", {
-      waitUntil: "load",
-    });
-    await this.page.waitForLoadState("networkidle");
+  async open() {
+    await this.navigate("https://growth.deel.training/dev/salary-insights");
     await this.page.waitForTimeout(1000);
   }
 
   async selectRoleOptionFromDropdown(role) {
     await this.selectRole.click();
-    await this.page.getByText(role).click();
+    await this.clickByText(role);
   }
 
   async selectCountryOptionFromDropdown(country) {
@@ -75,7 +71,6 @@ export default class SalaryInsights {
       this.promoSectionDescription
     );
 
-    // Assert all parts of the promo section description
     expect(promoDescriptionText).toContain(
       `The median salary is ${currencySymbol}`
     );
@@ -86,22 +81,9 @@ export default class SalaryInsights {
       `Salary estimates are based on anonymous submissions to Deel by ${role} employees in ${country}`
     );
 
-    // Assert country flag
     const countryFlag = this.promoSection.locator(
       `img[alt="${country.toLowerCase()}"]`
     );
     await expect(countryFlag).toHaveAttribute("alt", country.toLowerCase());
-  }
-
-  // Helper method to verify text within an element
-  async verifyTextInElement(element, expectedText) {
-    const elementText = element.getByText(expectedText);
-    await expect(elementText).toContainText(expectedText);
-  }
-
-  // Helper method to clean and normalize text content
-  async getCleanedText(element) {
-    const text = await element.textContent();
-    return text.trim().replace(/\s+/g, " ");
   }
 }

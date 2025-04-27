@@ -6,7 +6,7 @@ test.describe("Salary Insights Tests", () => {
     test(`Displays salary for selected role ${data.role} in ${data.country}`, async ({
       salaryInsightsPage,
     }) => {
-      await salaryInsightsPage.navigate();
+      await salaryInsightsPage.open();
       await salaryInsightsPage.selectRoleOptionFromDropdown(data.role);
       await salaryInsightsPage.selectCountryOptionFromDropdown(data.country);
       await salaryInsightsPage.searchButton.click();
@@ -34,7 +34,7 @@ test.describe("Salary Insights Negative Tests", () => {
   test("Should show error when country is not selected", async ({
     salaryInsightsPage,
   }) => {
-    await salaryInsightsPage.navigate();
+    await salaryInsightsPage.open();
     await salaryInsightsPage.selectRoleOptionFromDropdown("QA Engineer");
     await salaryInsightsPage.searchButton.click();
 
