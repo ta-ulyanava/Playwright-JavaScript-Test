@@ -22,12 +22,12 @@ export default class SalaryInsightsPage extends BasePage {
     await this.page.waitForTimeout(1000);
   }
 
-  async selectRoleOptionFromDropdown(role) {
+  async chooseRole(role) {
     await this.selectRole.click();
     await this.clickByText(role);
   }
 
-  async selectCountryOptionFromDropdown(country) {
+  async chooseCountry(country) {
     await this.selectCountry.click();
     await this.page
       .getByRole("listbox")
@@ -37,32 +37,20 @@ export default class SalaryInsightsPage extends BasePage {
       .click();
   }
 
-  async verifyFilterBarForRoleCountryAndCurrencyCode(
-    role,
-    country,
-    currencyCode
-  ) {
+  async checkFilterBarDetails(role, country, currencyCode) {
     await this.verifyTextInElement(this.filterBar, role);
     await this.verifyTextInElement(this.filterBar, country);
     await this.verifyTextInElement(this.filterBar, currencyCode);
   }
 
-  async verifySalaryTableForRoleCountryAndCurrencySymbol(
-    role,
-    country,
-    currencySymbol
-  ) {
+  async checkSalaryTable(role, country, currencySymbol) {
     await expect(this.salaryTable).toContainText(
       `Senior ${role} compensation in ${country}`
     );
     await expect(this.salaryTable).toContainText(currencySymbol);
   }
 
-  async verifyPromoSectionForRoleCountryAndCurrencySymbol(
-    role,
-    country,
-    currencySymbol
-  ) {
+  async checkPromoSection(role, country, currencySymbol) {
     await expect(this.promoSection).toContainText(
       `How much does a Senior ${role} make in ${country}?`
     );

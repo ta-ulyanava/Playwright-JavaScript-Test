@@ -7,21 +7,21 @@ test.describe("Salary Insights Tests", () => {
       salaryInsightsPage,
     }) => {
       await salaryInsightsPage.open();
-      await salaryInsightsPage.selectRoleOptionFromDropdown(data.role);
-      await salaryInsightsPage.selectCountryOptionFromDropdown(data.country);
+      await salaryInsightsPage.chooseRole(data.role);
+      await salaryInsightsPage.chooseCountry(data.country);
       await salaryInsightsPage.searchButton.click();
 
-      await salaryInsightsPage.verifyFilterBarForRoleCountryAndCurrencyCode(
+      await salaryInsightsPage.checkFilterBarDetails(
         data.role,
         data.country,
         data.currency.code
       );
-      await salaryInsightsPage.verifySalaryTableForRoleCountryAndCurrencySymbol(
+      await salaryInsightsPage.checkSalaryTable(
         data.role,
         data.country,
         data.currency.symbol
       );
-      await salaryInsightsPage.verifyPromoSectionForRoleCountryAndCurrencySymbol(
+      await salaryInsightsPage.checkPromoSection(
         data.role,
         data.country,
         data.currency.symbol
@@ -35,7 +35,7 @@ test.describe("Salary Insights Negative Tests", () => {
     salaryInsightsPage,
   }) => {
     await salaryInsightsPage.open();
-    await salaryInsightsPage.selectRoleOptionFromDropdown("QA Engineer");
+    await salaryInsightsPage.chooseRole("QA Engineer");
     await salaryInsightsPage.searchButton.click();
 
     await expect(salaryInsightsPage.page.locator("#main")).toContainText(
