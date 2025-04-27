@@ -4,7 +4,10 @@ export default class BasePage {
   constructor(page) {
     this.page = page;
   }
-
+  async openPath(path) {
+    await this.page.goto(path, { waitUntil: "load" });
+    await this.page.waitForLoadState("networkidle");
+  }
   async verifyTextInElement(element, expectedText) {
     const elementText = element.getByText(expectedText);
     await expect(elementText).toContainText(expectedText);
@@ -15,10 +18,6 @@ export default class BasePage {
     return text.trim().replace(/\s+/g, " ");
   }
 
-  async navigate(url) {
-    await this.page.goto(url, { waitUntil: "load" });
-    await this.page.waitForLoadState("networkidle");
-  }
   async clickByText(text) {
     const element = this.page.getByText(text, { exact: true });
     await expect(element).toBeVisible();

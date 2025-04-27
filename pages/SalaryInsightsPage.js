@@ -18,8 +18,7 @@ export default class SalaryInsightsPage extends BasePage {
   }
 
   async open() {
-    await this.page.goto("/dev/salary-insights", { waitUntil: "load" });
-    await this.page.waitForLoadState("networkidle");
+    await this.openPath("/dev/salary-insights");
     await this.page.waitForTimeout(1000);
   }
 
