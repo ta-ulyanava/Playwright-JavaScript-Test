@@ -5,9 +5,11 @@
 This project provides automated E2E tests for the **Salary Insights** form using **Playwright**.  
 Users select a role and a country to view salary estimates. Tests cover positive flows (valid selections) and negative cases (missing country selection).,
 
-## 📊 Latest Playwright Test Report
+## 📊 Test Reports
 
-[👉 View the latest Playwright Test Report for Chromium here](https://ta-ulyanava.github.io/Playwright-JavaScript-Test/)
+- [▶️ Playwright native Report](https://ta-ulyanava.github.io/Playwright-JavaScript-Test/playwright-report/)
+- [💎 Allure Report](https://ta-ulyanava.github.io/Playwright-JavaScript-Test/allure-report/)
+
 
 ## Project Structure
 
