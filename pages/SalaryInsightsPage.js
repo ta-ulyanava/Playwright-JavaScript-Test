@@ -1,5 +1,9 @@
 import { expect } from "@playwright/test";
 import BasePage from "./BasePage";
+// TODO: Refactor SalaryInsightsPage by splitting into components:
+// - SalaryInsightsForm: methods for choosing role, choosing country, clicking search
+// - SalaryInsightsResult: methods for checking filter bar, salary table, promo section, and main error message
+
 
 export default class SalaryInsightsPage extends BasePage {
   constructor(page) {
