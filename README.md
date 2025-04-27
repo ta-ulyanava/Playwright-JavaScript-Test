@@ -7,10 +7,6 @@ This repository contains an automation task for Deel, completed in 2024. It uses
 - Node.js (LTS recommended)
 - Playwright
 
-## Debugging with Algo CI
-
-I use Algo CI reports to identify issues and gain insights into test failures.
-
 ## CI with GitHub Actions
 
 The project is integrated with GitHub Actions for continuous testing on each push or pull request.
@@ -18,4 +14,6 @@ The project is integrated with GitHub Actions for continuous testing on each pus
 ## Running Tests
 
 Use the following command to run the tests:
+```sh
 npx playwright test --project=chromium
+```
