@@ -1,6 +1,7 @@
-import { test } from "@playwright/test";
+import { test, page } from "@playwright/test";
 import SalaryInsights from "../pages/salaryInsights";
 import countryList from "../utils/salaryInsightsTestData";
+//const salaryInsites = new SalaryInsights(page);
 
 test.describe("Salary Insights Tests", () => {
   for (const data of countryList) {
@@ -33,4 +34,13 @@ test.describe("Salary Insights Tests", () => {
       );
     });
   }
+});
+test("negative test", async ({ page }) => {
+  const salaryInsites = new SalaryInsights(page);
+  await salaryInsites.navigate();
+  await salaryInsites.selectRoleOptionFromDropdown(countryList.data.role);
+  await salaryInsites.searchButton.click();
+
+  await expect("#main").toContainText("Country is required");
+  await expect(salaryInsites.filterBar).toBeHidden();
 });
