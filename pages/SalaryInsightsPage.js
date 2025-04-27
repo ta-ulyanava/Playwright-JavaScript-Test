@@ -18,7 +18,8 @@ export default class SalaryInsightsPage extends BasePage {
   }
 
   async open() {
-    await this.navigate("https://growth.deel.training/dev/salary-insights");
+    await this.page.goto("/dev/salary-insights", { waitUntil: "load" });
+    await this.page.waitForLoadState("networkidle");
     await this.page.waitForTimeout(1000);
   }
 
