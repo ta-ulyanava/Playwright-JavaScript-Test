@@ -7,7 +7,7 @@ Users select a role and a country to view salary estimates. Tests cover positive
 
 ## 📊 Latest Playwright Test Report
 
-[👉 View the latest Playwright Test Report here](https://ta-ulyanava.github.io/Playwright-JavaScript-Test/)
+[👉 View the latest Playwright Test Report for Chromium here](https://ta-ulyanava.github.io/Playwright-JavaScript-Test/)
 
 ## Project Structure
 
