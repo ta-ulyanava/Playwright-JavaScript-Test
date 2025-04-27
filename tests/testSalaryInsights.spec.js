@@ -9,18 +9,20 @@ test.describe("Salary Insights Tests", () => {
       await salaryInsightsPage.open();
       await salaryInsightsPage.chooseRole(data.role);
       await salaryInsightsPage.chooseCountry(data.country);
-      await salaryInsightsPage.searchButton.click();
+      await salaryInsightsPage.clickSearch();
 
-      await salaryInsightsPage.checkFilterBarDetails(
+      await salaryInsightsPage.checkFilterBar(
         data.role,
         data.country,
         data.currency.code
       );
+
       await salaryInsightsPage.checkSalaryTable(
         data.role,
         data.country,
         data.currency.symbol
       );
+
       await salaryInsightsPage.checkPromoSection(
         data.role,
         data.country,
@@ -36,11 +38,10 @@ test.describe("Salary Insights Negative Tests", () => {
   }) => {
     await salaryInsightsPage.open();
     await salaryInsightsPage.chooseRole("QA Engineer");
-    await salaryInsightsPage.searchButton.click();
-
+    await salaryInsightsPage.clickSearch();
     await expect(salaryInsightsPage.page.locator("#main")).toContainText(
       "Country is required"
     );
-    await expect(salaryInsightsPage.filterBar).toBeHidden();
+    await expect(salaryInsightsPage.result.filterBar).toBeHidden();
   });
 });

@@ -4,17 +4,19 @@ import BasePage from "./BasePage";
 export default class SalaryInsightsPage extends BasePage {
   constructor(page) {
     super(page);
-
-    this.selectRole = page.getByTestId("role-field");
-    this.selectCountry = page.getByTestId("country-field");
-    this.searchButton = page.getByRole("button", { name: "Search" });
-
-    this.filterBar = page.getByTestId("filter-bar");
-    this.salaryTable = page.getByTestId("salary-table");
-    this.promoSection = page.locator("#promo-section-container");
-    this.promoSectionDescription = this.promoSection.locator(
-      ".MuiGrid-root.MuiGrid-item.css-tc4co3"
-    );
+    this.form = {
+      roleDropdown: page.getByTestId("role-field"),
+      countryDropdown: page.getByTestId("country-field"),
+      searchButton: page.getByRole("button", { name: "Search" }),
+    };
+    this.result = {
+      filterBar: page.getByTestId("filter-bar"),
+      salaryTable: page.getByTestId("salary-table"),
+      promoSection: page.locator("#promo-section-container"),
+      promoSectionDescription: page
+        .locator("#promo-section-container")
+        .locator(".MuiGrid-root.MuiGrid-item.css-tc4co3"),
+    };
   }
 
   async open() {
@@ -23,12 +25,12 @@ export default class SalaryInsightsPage extends BasePage {
   }
 
   async chooseRole(role) {
-    await this.selectRole.click();
+    await this.form.roleDropdown.click();
     await this.clickByText(role);
   }
 
   async chooseCountry(country) {
-    await this.selectCountry.click();
+    await this.form.countryDropdown.click();
     await this.page
       .getByRole("listbox")
       .locator("div")
@@ -37,41 +39,44 @@ export default class SalaryInsightsPage extends BasePage {
       .click();
   }
 
-  async checkFilterBarDetails(role, country, currencyCode) {
-    await this.verifyTextInElement(this.filterBar, role);
-    await this.verifyTextInElement(this.filterBar, country);
-    await this.verifyTextInElement(this.filterBar, currencyCode);
+  async clickSearch() {
+    await this.form.searchButton.click();
+  }
+
+  async checkFilterBar(role, country, currencyCode) {
+    await this.verifyTextInElement(this.result.filterBar, role);
+    await this.verifyTextInElement(this.result.filterBar, country);
+    await this.verifyTextInElement(this.result.filterBar, currencyCode);
   }
 
   async checkSalaryTable(role, country, currencySymbol) {
-    await expect(this.salaryTable).toContainText(
+    await expect(this.result.salaryTable).toContainText(
       `Senior ${role} compensation in ${country}`
     );
-    await expect(this.salaryTable).toContainText(currencySymbol);
+    await expect(this.result.salaryTable).toContainText(currencySymbol);
   }
 
   async checkPromoSection(role, country, currencySymbol) {
-    await expect(this.promoSection).toContainText(
+    const promo = this.result.promoSection;
+    await expect(promo).toContainText(
       `How much does a Senior ${role} make in ${country}?`
     );
 
-    const promoDescriptionText = await this.getCleanedText(
-      this.promoSectionDescription
+    const promoDescription = await this.getCleanedText(
+      this.result.promoSectionDescription
     );
 
-    expect(promoDescriptionText).toContain(
+    expect(promoDescription).toContain(
       `The median salary is ${currencySymbol}`
     );
-    expect(promoDescriptionText).toContain(
+    expect(promoDescription).toContain(
       `per year for a Senior ${role} in ${country}`
     );
-    expect(promoDescriptionText).toContain(
+    expect(promoDescription).toContain(
       `Salary estimates are based on anonymous submissions to Deel by ${role} employees in ${country}`
     );
 
-    const countryFlag = this.promoSection.locator(
-      `img[alt="${country.toLowerCase()}"]`
-    );
+    const countryFlag = promo.locator(`img[alt="${country.toLowerCase()}"]`);
     await expect(countryFlag).toHaveAttribute("alt", country.toLowerCase());
   }
 }
