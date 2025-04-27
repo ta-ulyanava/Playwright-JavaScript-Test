@@ -3,7 +3,7 @@
 ## Overview
 
 This project provides automated E2E tests for the **Salary Insights** form using **Playwright**.  
-Users select a role and a country to view salary estimates. Tests cover positive flows (valid selections) and negative cases (missing country selection).
+Users select a role and a country to view salary estimates. Tests cover positive flows (valid selections) and negative cases (missing country selection)..
 
 Built for fast feedback, clean structure, and easy extension.
 
