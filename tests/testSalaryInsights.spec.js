@@ -39,7 +39,7 @@ test.describe("Salary Insights Negative Tests", () => {
     await salaryInsightsPage.open();
     await salaryInsightsPage.chooseRole("QA Engineer");
     await salaryInsightsPage.clickSearch();
-    await expect(salaryInsightsPage.page.locator("#main")).toContainText(
+    await expect(salaryInsightsPage.result.main).toContainText(
       "Country is required"
     );
     await expect(salaryInsightsPage.result.filterBar).toBeHidden();

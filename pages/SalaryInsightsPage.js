@@ -16,6 +16,7 @@ export default class SalaryInsightsPage extends BasePage {
       promoSectionDescription: page
         .locator("#promo-section-container")
         .locator(".MuiGrid-root.MuiGrid-item.css-tc4co3"),
+      main: page.locator("#main"),
     };
   }
 
