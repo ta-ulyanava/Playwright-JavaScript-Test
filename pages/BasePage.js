@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { allure } from "allure-playwright";
+import { allure } from "allure-playwright/runtime";
 
 export default class BasePage {
   constructor(page) {

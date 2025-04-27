@@ -1,5 +1,6 @@
 import { test, expect } from "./baseTest";
 import countryList from "../data/salaryInsightsTestData";
+import { allure } from "allure-playwright/runtime";
 
 test.describe("Salary Insights Positive Tests", () => {
   for (const data of countryList) {

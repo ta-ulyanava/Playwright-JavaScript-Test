@@ -45,16 +45,3 @@ const config = defineConfig({
 });
 
 module.exports = config;
-
-/**
- * Attach screenshot to Allure if test fails
- */
-test.afterEach(async ({ page }, testInfo) => {
-  if (testInfo.status !== testInfo.expectedStatus) {
-    const screenshot = await page.screenshot();
-    allure.attach('Failure Screenshot', {
-      content: screenshot,
-      type: 'image/png',
-    });
-  }
-});
