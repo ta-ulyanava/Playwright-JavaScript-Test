@@ -3,7 +3,7 @@ import countryList from "../data/salaryInsightsTestData";
 
 test.describe("Salary Insights Tests", () => {
   for (const data of countryList) {
-    test(`Displays salary for selected role ${data.role} in ${data.country}`, async ({
+    test(`Displays salary for role ${data.role} in ${data.country}`, async ({
       salaryInsightsPage,
     }) => {
       await salaryInsightsPage.open();
@@ -14,13 +14,11 @@ test.describe("Salary Insights Tests", () => {
         data.country,
         data.currency.code
       );
-
       await salaryInsightsPage.checkSalaryTable(
         data.role,
         data.country,
         data.currency.symbol
       );
-
       await salaryInsightsPage.checkPromoSection(
         data.role,
         data.country,
@@ -31,12 +29,13 @@ test.describe("Salary Insights Tests", () => {
 });
 
 test.describe("Salary Insights Negative Tests", () => {
-  test("Should show error when country is not selected", async ({
+  test("Shows error when country is not selected", async ({
     salaryInsightsPage,
   }) => {
     await salaryInsightsPage.open();
     await salaryInsightsPage.chooseRole("QA Engineer");
     await salaryInsightsPage.clickSearch();
+
     await salaryInsightsPage.checkMainErrorMessage("Country is required");
     await expect(salaryInsightsPage.result.filterBar).toBeHidden();
   });
