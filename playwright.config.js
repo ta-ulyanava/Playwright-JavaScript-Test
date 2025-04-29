@@ -1,17 +1,10 @@
 // @ts-check
-const { defineConfig, devices, test } = require("@playwright/test");
-const { allure } = require("allure-playwright");
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+import { defineConfig, devices } from "@playwright/test";
 
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const config = defineConfig({
+export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -43,5 +36,3 @@ const config = defineConfig({
     },
   ],
 });
-
-module.exports = config;

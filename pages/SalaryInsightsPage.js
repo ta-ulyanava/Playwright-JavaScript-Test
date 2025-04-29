@@ -1,10 +1,6 @@
 import { expect } from "@playwright/test";
 import BasePage from "./BasePage";
 
-// TODO: Refactor SalaryInsightsPage by splitting into components:
-// - SalaryInsightsForm: methods for choosing role, choosing country, clicking search
-// - SalaryInsightsResult: methods for checking filter bar, salary table, promo section, and main error message
-
 export default class SalaryInsightsPage extends BasePage {
   constructor(page) {
     super(page);
@@ -25,91 +21,73 @@ export default class SalaryInsightsPage extends BasePage {
   }
 
   async open() {
-    await allure.step('Open Salary Insights page', async () => {
-      await this.openPath("/dev/salary-insights");
-      await this.page.waitForTimeout(1000);
-    });
+    await this.openPath("/dev/salary-insights");
+    await this.page.waitForTimeout(1000);
   }
 
   async chooseRole(role) {
-    await allure.step(`Choose role: ${role}`, async () => {
-      await this.form.roleDropdown.click();
-      await this.clickByText(role);
-    });
+    await this.form.roleDropdown.click();
+    await this.clickByText(role);
   }
 
   async chooseCountry(country) {
-    await allure.step(`Choose country: ${country}`, async () => {
-      await this.form.countryDropdown.click();
-      await this.page
-        .getByRole("listbox")
-        .locator("div")
-        .filter({ hasText: country })
-        .nth(1)
-        .click();
-    });
+    await this.form.countryDropdown.click();
+    await this.page
+      .getByRole("listbox")
+      .locator("div")
+      .filter({ hasText: country })
+      .nth(1)
+      .click();
   }
 
   async clickSearch() {
-    await allure.step('Click Search button', async () => {
-      await this.form.searchButton.click();
-    });
+    await this.form.searchButton.click();
   }
 
   async fillFormAndSearch(role, country) {
-    await allure.step(`Fill form and search for role: ${role} in country: ${country}`, async () => {
-      await this.chooseRole(role);
-      await this.chooseCountry(country);
-      await this.clickSearch();
-    });
+    await this.chooseRole(role);
+    await this.chooseCountry(country);
+    await this.clickSearch();
   }
 
   async checkFilterBar(role, country, currencyCode) {
-    await allure.step(`Check Filter Bar for role: ${role}, country: ${country}, currency: ${currencyCode}`, async () => {
-      await this.verifyTextInElement(this.result.filterBar, role);
-      await this.verifyTextInElement(this.result.filterBar, country);
-      await this.verifyTextInElement(this.result.filterBar, currencyCode);
-    });
+    await this.verifyTextInElement(this.result.filterBar, role);
+    await this.verifyTextInElement(this.result.filterBar, country);
+    await this.verifyTextInElement(this.result.filterBar, currencyCode);
   }
 
   async checkSalaryTable(role, country, currencySymbol) {
-    await allure.step(`Check Salary Table for role: ${role}, country: ${country}`, async () => {
-      await expect(this.result.salaryTable).toContainText(
-        `Senior ${role} compensation in ${country}`
-      );
-      await expect(this.result.salaryTable).toContainText(currencySymbol);
-    });
+    await expect(this.result.salaryTable).toContainText(
+      `Senior ${role} compensation in ${country}`
+    );
+    await expect(this.result.salaryTable).toContainText(currencySymbol);
   }
 
   async checkPromoSection(role, country, currencySymbol) {
-    await allure.step(`Check Promo Section for role: ${role}, country: ${country}`, async () => {
-      const promo = this.result.promoSection;
-      await expect(promo).toContainText(
-        `How much does a Senior ${role} make in ${country}?`
-      );
+    const promo = this.result.promoSection;
+    await expect(promo).toContainText(
+      `How much does a Senior ${role} make in ${country}?`
+    );
 
-      const promoDescription = await this.getCleanedText(
-        this.result.promoSectionDescription
-      );
+    const promoDescription = await this.getCleanedText(
+      this.result.promoSectionDescription
+    );
 
-      expect(promoDescription).toContain(
-        `The median salary is ${currencySymbol}`
-      );
-      expect(promoDescription).toContain(
-        `per year for a Senior ${role} in ${country}`
-      );
-      expect(promoDescription).toContain(
-        `Salary estimates are based on anonymous submissions to Deel by ${role} employees in ${country}`
-      );
+    expect(promoDescription).toContain(
+      `The median salary is ${currencySymbol}`
+    );
+    expect(promoDescription).toContain(
+      `per year for a Senior ${role} in ${country}`
+    );
+    expect(promoDescription).toContain(
+      `Salary estimates are based on anonymous submissions to Deel by ${role} employees in ${country}`
+    );
 
-      const countryFlag = promo.locator(`img[alt="${country.toLowerCase()}"]`);
-      await expect(countryFlag).toHaveAttribute("alt", country.toLowerCase());
-    });
+    const countryFlag = promo.locator(`img[alt="${country.toLowerCase()}"]`);
+    await expect(countryFlag).toHaveAttribute("alt", country.toLowerCase());
   }
 
   async checkMainErrorMessage(expectedMessage) {
-    await allure.step(`Check main error message: ${expectedMessage}`, async () => {
-      await expect(this.result.main).toContainText(expectedMessage);
-    });
+    await expect(this.result.main).toContainText(expectedMessage);
   }
 }

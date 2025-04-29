@@ -1,6 +1,6 @@
 import { test as base, expect } from "@playwright/test";
-import { allure } from "allure-playwright";
-import SalaryInsightsPage from "../pages/SalaryInsightsPage";
+import { allure } from "allure-playwright"; 
+import SalaryInsightsPage from "../pages/SalaryInsightsPage.js"; 
 
 export const test = base.extend({
   salaryInsightsPage: async ({ page }, use) => {

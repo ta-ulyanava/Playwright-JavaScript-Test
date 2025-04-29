@@ -1,5 +1,8 @@
 import { expect } from "@playwright/test";
-import { allure } from "allure-playwright";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const allure = require("allure-playwright");
+
 
 export default class BasePage {
   constructor(page) {

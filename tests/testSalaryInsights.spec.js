@@ -1,13 +1,13 @@
-import { test, expect } from "./baseTest";
-import countryList from "../data/salaryInsightsTestData";
-import { allure } from "allure-playwright";
+import { test, expect } from "./baseTest.js";
+import countryList from "../data/salaryInsightsTestData.js";
+import { allure } from "allure-playwright"; 
 
 test.describe("Salary Insights Positive Tests", () => {
   for (const data of countryList) {
     test(`Displays salary for role ${data.role} in ${data.country}`, async ({ salaryInsightsPage }) => {
       allure.story('Salary Form');
       await salaryInsightsPage.open();
-    
+
       await salaryInsightsPage.fillFormAndSearch(data.role, data.country);
 
       await salaryInsightsPage.checkFilterBar(data.role, data.country, data.currency.code);
