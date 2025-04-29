@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { runStep } from "../helpers/stepHelper.js";
+import { runStep } from "../utils/stepHelper.js";
 
 export default class BasePage {
   constructor(page, step) {
