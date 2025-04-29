@@ -24,8 +24,10 @@ Users select a role and a country to view salary estimates. Tests cover positive
 - Install project dependencies:
   ```bash
   npm install
+  ```
 
-  ## Continuous Integration
+
+## Continuous Integration
 
 Tests are configured to run automatically via **GitHub Actions** on each push and pull request.
 
