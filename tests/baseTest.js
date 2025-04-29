@@ -2,8 +2,8 @@ import { test as base, expect } from "@playwright/test";
 import SalaryInsightsPage from "../pages/SalaryInsightsPage.js";
 
 export const test = base.extend({
-  salaryInsightsPage: async ({ page }, use, testInfo) => {
-    const salaryInsightsPage = new SalaryInsightsPage(page, testInfo);
+  salaryInsightsPage: async ({ page }, use, test) => {
+    const salaryInsightsPage = new SalaryInsightsPage(page, test);
     await use(salaryInsightsPage);
   },
 });
