@@ -1,10 +1,9 @@
 import { test as base, expect } from "@playwright/test";
-import { allure } from "allure-playwright"; 
-import SalaryInsightsPage from "../pages/SalaryInsightsPage.js"; 
+import SalaryInsightsPage from "../pages/SalaryInsightsPage.js";
 
 export const test = base.extend({
-  salaryInsightsPage: async ({ page }, use) => {
-    const salaryInsightsPage = new SalaryInsightsPage(page);
+  salaryInsightsPage: async ({ page }, use, testInfo) => {
+    const salaryInsightsPage = new SalaryInsightsPage(page, testInfo);
     await use(salaryInsightsPage);
   },
 });
@@ -12,9 +11,9 @@ export const test = base.extend({
 test.afterEach(async ({ page }, testInfo) => {
   if (testInfo.status !== testInfo.expectedStatus) {
     const screenshot = await page.screenshot();
-    allure.attach('Failure Screenshot', {
-      content: screenshot,
-      type: 'image/png',
+    await testInfo.attach('Failure Screenshot', {
+      body: screenshot,
+      contentType: 'image/png',
     });
   }
 });
