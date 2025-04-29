@@ -2,10 +2,11 @@ import { test as base, expect } from "@playwright/test";
 import SalaryInsightsPage from "../pages/SalaryInsightsPage.js";
 
 export const test = base.extend({
-  salaryInsightsPage: async ({ page }, use, test) => {
-    const salaryInsightsPage = new SalaryInsightsPage(page, test);
+  salaryInsightsPage: async ({ page }, use, testInfo) => {
+    const salaryInsightsPage = new SalaryInsightsPage(page, testInfo?.step?.bind(testInfo));
     await use(salaryInsightsPage);
-  },
+  }
+  
 });
 
 test.afterEach(async ({ page }, testInfo) => {
