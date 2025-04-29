@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import BasePage from "./BasePage.js";
 
 export default class SalaryInsightsPage extends BasePage {
-  constructor(page) {
+  constructor(page,test) {
     super(page, test);
     this.form = {
       roleDropdown: page.getByTestId("role-field"),
